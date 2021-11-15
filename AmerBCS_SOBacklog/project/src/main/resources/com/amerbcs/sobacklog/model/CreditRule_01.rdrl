@@ -1,0 +1,10 @@
+package com.amerbcs.sobacklog.model;
+
+import java.lang.Number;
+
+rule "CreditRule_01"
+	dialect "mvel"
+	when
+		exists ($input : SalesItem( core.blockCredit == true )) 
+	then
+end
