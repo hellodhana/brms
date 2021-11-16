@@ -1,0 +1,21 @@
+package com.amerbcs.sobacklog.rule;
+
+//list any import classes here.
+import com.amerbcs.sobacklog.model.SalesItem
+import com.amerbcs.sobacklog.model.EmailAction
+import java.lang.String
+import java.util.Arrays
+
+//declare any global variables here
+rule "CreditRule02"
+	dialect "mvel"
+	when
+		exists ($input : SalesItem( core.blockCredit == true )) 
+	then
+		EmailAction fact0 = new EmailAction();
+		fact0.setTo( Arrays.asList("dhanasekar.karuppannan@avnet.com"));
+		fact0.setBody( "Credit rule" );
+		fact0.setSubject( "Credit rule applied" );
+		insertLogical( fact0 );
+		System.out.println( "Credit Rule Saltisfied" );
+end
